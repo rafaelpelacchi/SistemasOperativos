@@ -1,4 +1,4 @@
-package sistemas.operativos;
+package sistemasOperativos;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
