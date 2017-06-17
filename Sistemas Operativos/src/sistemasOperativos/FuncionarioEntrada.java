@@ -29,7 +29,7 @@ public class FuncionarioEntrada extends Thread {
     
     @Override
     public void run(){
-        if (hinchaActual.geAccede()) {
+        if (hinchaActual.getAccede()) {
             System.out.println("Entró" + hinchaActual.getNombre());
         }
          System.out.println("--------------- No entró" + hinchaActual.getNombre());

@@ -16,6 +16,7 @@ public class Principal {
      */
     public static void main(String[] args) {
         
+        /*
         String[] nombres  = ManejadorArchivosGenerico.leerArchivo("src/sistemasOperativos/Funcionarios");
         FuncionarioEntrada[] funcionarios = new FuncionarioEntrada[nombres.length];
         int i =0;
@@ -40,16 +41,16 @@ public class Principal {
             hinchasAmerica[i] = actual;
             i++;
         }
-       Hinchada america= new Hinchada("America",hinchasAmerica, funcionarios);
-       Hinchada colombes= new Hinchada("America",hinchasAmerica, funcionarios);
-       Hinchada olimpica= new Hinchada("America",hinchasAmerica, funcionarios);
-       Hinchada amsterdam= new Hinchada("America",hinchasAmerica, funcionarios);
+         Tribuna america= new Tribuna("America",hinchasAmerica, funcionarios);
+       Tribuna colombes= new Tribuna("Colombes",hinchasAmerica, funcionarios);
+       Tribuna olimpica= new Tribuna("Olimpica",hinchasAmerica, funcionarios);
+       Tribuna amsterdam= new Tribuna("Amsterdam",hinchasAmerica, funcionarios);
        
-        Hinchada[] hinchadas ={america,colombes,olimpica,amsterdam};
+        Tribuna[] hinchadas ={america,colombes,olimpica,amsterdam};
         
         Estadio estadioCentenario = new Estadio("Centenario", funcionarios, hinchadas);
         estadioCentenario.entrarGente();
-       
+       */
     }
     
 }

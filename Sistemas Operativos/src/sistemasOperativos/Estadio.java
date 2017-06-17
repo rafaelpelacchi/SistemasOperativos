@@ -14,17 +14,17 @@ public class Estadio {
     
     private String nombre;
     private FuncionarioEntrada[] funcionarios;
-    public Hinchada[] hinchadas;
+    public Tribuna[] hinchadas;
     
 
-    public Estadio(String nombre, FuncionarioEntrada[] funcionarios, Hinchada[] hinchadas){
+    public Estadio(String nombre, FuncionarioEntrada[] funcionarios, Tribuna[] hinchadas){
     this.nombre = nombre;
     this.funcionarios = funcionarios;
     this.hinchadas = hinchadas;
     }
     
     public void entrarGente(){
-        for(Hinchada hinchada: hinchadas){
+        for(Tribuna hinchada: hinchadas){
             hinchada.start();
         }
     }

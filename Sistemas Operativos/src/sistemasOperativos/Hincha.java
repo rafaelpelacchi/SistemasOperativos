@@ -13,14 +13,17 @@ package sistemasOperativos;
 public class Hincha {
     private String nombre;
     private String cedula;
+    private int prioridad; // 1- Embarazada 2- Socios 3- Hinchas Normales
+    private int hora;
     private boolean accede;
     
     public Hincha(){}
     
-    public Hincha(String nombre, String cedula,boolean accede){
+    public Hincha(String nombre, String cedula,boolean accede, int hora){
         this.nombre = nombre;
         this.cedula = cedula;
         this.accede = accede;
+        this.hora = hora;
     }
     
     public String getNombre(){ return this.nombre; }
@@ -29,9 +32,10 @@ public class Hincha {
     public String getCedula(){ return this.cedula; }
     public void setCedula(String cedula){ this.cedula=cedula; }
     
-    public boolean geAccede(){ return this.accede; }
+    public boolean getAccede(){ return this.accede; }
     public void setAccede(boolean accede){ this.accede = accede; }
     
-    
-    
+    public int getHora(){ return this.hora; }
+    public void setHora(int hora){ this.hora = hora; }
+   
 }
