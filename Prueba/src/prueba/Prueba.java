@@ -47,9 +47,9 @@ public class Prueba {
          //Declaro mi reloj, dandole los semaforos de cada hinchada junto a sus 
          Reloj miReloj = new Reloj(semaforoAmsterdam, semaforoReloj, datosAmsterdam,datosColombes,datosOlimpica,datosAmerica);
          Tribuna amsterdam = new Tribuna("Amsterdam", semaforoReloj,"src/prueba/hinchasAmsterdam.txt", 4, datosAmsterdam);
-         Tribuna colombes = new Tribuna("Colombes", semaforoReloj,"src/prueba/hinchasColombes.txt", 4, datosAmsterdam);
-         Tribuna olimpica = new Tribuna("Olimpica", semaforoReloj,"src/prueba/hinchasOlimpica.txt", 4, datosAmsterdam);
-         Tribuna america = new Tribuna("America", semaforoReloj,"src/prueba/hinchasAmerica.txt", 4, datosAmsterdam);
+         Tribuna colombes = new Tribuna("Colombes", semaforoReloj,"src/prueba/hinchasColombes.txt", 4, datosColombes);
+         Tribuna olimpica = new Tribuna("Olimpica", semaforoReloj,"src/prueba/hinchasOlimpica.txt", 4, datosOlimpica);
+         Tribuna america = new Tribuna("America", semaforoReloj,"src/prueba/hinchasAmerica.txt", 4, datosAmerica);
          
          Estadio estadioCentenario = new Estadio("Estadio Centenario",amsterdam,colombes,olimpica,america,miReloj);
          

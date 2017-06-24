@@ -36,17 +36,16 @@ public class Reloj extends Thread{
          while(hayMasHinchas()){
              try{ 
                  
-                if(!controlAmsterdam.getTermino()){controlAmsterdam.getSemaphoreReloj().acquire();} 
-                if(!controlColombes.getTermino()){System.out.println("asfasd"); controlColombes.getSemaphoreReloj().acquire(); System.out.println("asfasd");}
-                if(!controlOlimpica.getTermino()){controlOlimpica.getSemaphoreReloj().acquire();}
-                if(!controlAmerica.getTermino()){controlAmerica.getSemaphoreReloj().acquire();} 
+                if(!controlAmsterdam.getTermino()){System.out.println("Adquiero Amsterdam"); controlAmsterdam.getSemaphoreReloj().acquire(); System.out.println("Quedo Adquirido Amsterdam");} 
+                if(!controlColombes.getTermino()){System.out.println("Adquiero Colombes"); controlColombes.getSemaphoreReloj().acquire(); System.out.println("Quedo Adquirido Colombes");}
+                if(!controlOlimpica.getTermino()){System.out.println("Adquiero Olimpica"); controlOlimpica.getSemaphoreReloj().acquire(); System.out.println("Quedo Adquirido Olimpica");}
+                if(!controlAmerica.getTermino()){System.out.println("Adquiero America"); controlAmerica.getSemaphoreReloj().acquire(); System.out.println("Quedo Adquirido America");} 
                 
-                //semaforoReloj.acquire();
-                
-                if(!controlAmsterdam.getTermino()){controlAmsterdam.getSemaphore().release();} 
-                if(!controlColombes.getTermino()){controlColombes.getSemaphore().release();}
-                if(!controlOlimpica.getTermino()){controlOlimpica.getSemaphore().release();}
-                if(!controlAmerica.getTermino()){controlAmerica.getSemaphore().release();}  
+            
+                if(!controlAmsterdam.getTermino()){System.out.println("Voy a Liberar Amsterdam"); controlAmsterdam.getSemaphore().release(); System.out.println("Libere Amsterdam");} 
+                if(!controlColombes.getTermino()){System.out.println("Voy a Liberar Colombes");  controlColombes.getSemaphore().release();System.out.println("Libere Colombes");}
+                if(!controlOlimpica.getTermino()){ System.out.println("Voy a Liberar Olimpica"); controlOlimpica.getSemaphore().release();System.out.println("Libere Olimpica");}
+                if(!controlAmerica.getTermino()){ System.out.println("Voy a Liberar America");  controlAmerica.getSemaphore().release();System.out.println("Libere America");}  
              }
              catch(InterruptedException ex){
                 ex.printStackTrace();
