@@ -111,7 +111,7 @@ public class Tribuna  extends Thread{
                 for(int i = 0 ; i < this.cantidadFuncionarios ;i++  ){
                     hinchaAuxiliar = elegirHincha();
                     if (hinchaAuxiliar.getNombre() != null){
-                    System.out.println("El hincha " + hinchaAuxiliar.getNombre() + " Por la tribuna " + this.nombre + " Leido  " + hinchaAuxiliar.getLeido());
+                    System.out.println("El hincha " + hinchaAuxiliar.getNombre() + " Por la tribuna " + this.nombre);
                     }
                 }
                 controlDeTribuna.getSemaphoreReloj().release();
@@ -125,7 +125,7 @@ public class Tribuna  extends Thread{
   public Hincha elegirHincha()
   {
       Hincha hinchaElegido = new Hincha();      
-         if (!prioridadEmbarazada.isEmpty() && indiceEmbarazada < prioridadEmbarazada.size() && (prioridadEmbarazada.get(indiceEmbarazada).getHora() - tiempo.getTiempo()) == 0){
+         if (!prioridadEmbarazada.isEmpty() && indiceEmbarazada < prioridadEmbarazada.size() && (prioridadEmbarazada.get(indiceEmbarazada).getHora() - tiempo.getTiempo()) <= 0){
              hinchaElegido=prioridadEmbarazada.get(indiceEmbarazada);
              indiceEmbarazada++;
          }else if (!prioridadSocio.isEmpty() && indiceSocio < prioridadSocio.size() && (prioridadSocio.get(indiceSocio).getHora() - tiempo.getTiempo()) <= 0 && contadorSocios < 3){
