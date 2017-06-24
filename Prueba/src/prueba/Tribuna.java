@@ -5,6 +5,7 @@
  */
 package prueba;
 
+import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
 public class Tribuna  extends Thread{
@@ -13,6 +14,9 @@ public class Tribuna  extends Thread{
   private Hincha[] hinchasEntrada;
   private int cantidadFuncionarios;
   private ControlTribuna controlDeTribuna;  
+  private ArrayList prioridadEmbarazada;
+  private ArrayList prioridadSocio;
+  private ArrayList prioridadHincha;
   int indice;
   
   public Tribuna(String nombre, Semaphore semaforoReloj, String documentoHinchas, 
@@ -25,7 +29,11 @@ public class Tribuna  extends Thread{
         this.indice = 0;
   }
   
-  private Hincha[] cargarHinchas(String documentoHinchas){
+  public ArrayList getPrioridadEmbarazada(){return this.prioridadEmbarazada;}
+  public ArrayList getPrioridadSocio(){return this.prioridadSocio;}
+  public ArrayList getPrioridadHincha(){return this.prioridadHincha;}
+  
+  private void cargarHinchas(String documentoHinchas){
   //Leo los hinchas de una hinchada y los cargo en el Array
          String[] nombres  = ManejadorArchivosGenerico.leerArchivo(documentoHinchas);
          Hincha[] hinchasEntrada = new Hincha[nombres.length];
@@ -54,8 +62,18 @@ public class Tribuna  extends Thread{
             hinchasEntrada[i] = new  Hincha(nombre,apellido,cedula,accede,leido,hora,prioridad);
             i++;
         }
+         for(Hincha h : hinchasEntrada){
+             if (h.getPrioridad() == 1){
+                     this.getPrioridadEmbarazada().add(h);
+             }
+             else if (h.getPrioridad() == 2){
+                 this.getPrioridadSocio().add(h);
+             }
+             else {
+                 this.getPrioridadHincha().add(h);
+             }
+         }
          
-         return hinchasEntrada;
   }
     
   // 1- Leer con las camaras a los hinchas
