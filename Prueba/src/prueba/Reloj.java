@@ -14,18 +14,20 @@ import java.util.concurrent.Semaphore;
  */
 public class Reloj extends Thread{
     private Semaphore semaforoReloj;
+    private Tiempo tiempoActual;
     private ControlTribuna controlAmsterdam;
     private ControlTribuna controlColombes;
     private ControlTribuna controlOlimpica;
     private ControlTribuna controlAmerica;
     
     public Reloj(Semaphore semaforoAmsterdam, Semaphore semaforoReloj, ControlTribuna controlAmsterdam
-                , ControlTribuna controlColombes, ControlTribuna controlOlimpica, ControlTribuna controlAmerica){
+                , ControlTribuna controlColombes, ControlTribuna controlOlimpica, ControlTribuna controlAmerica, Tiempo tiempoActual){
         this.controlAmsterdam = controlAmsterdam;
         this.controlColombes = controlColombes;
         this.controlOlimpica = controlOlimpica;
         this.controlAmerica = controlAmerica;
         this.semaforoReloj = semaforoReloj;
+        this.tiempoActual = tiempoActual;
     }
         
     /*
@@ -35,17 +37,17 @@ public class Reloj extends Thread{
     public void run(){
          while(hayMasHinchas()){
              try{ 
-                 
-                if(!controlAmsterdam.getTermino()){System.out.println("Adquiero Amsterdam"); controlAmsterdam.getSemaphoreReloj().acquire(); System.out.println("Quedo Adquirido Amsterdam");} 
-                if(!controlColombes.getTermino()){System.out.println("Adquiero Colombes"); controlColombes.getSemaphoreReloj().acquire(); System.out.println("Quedo Adquirido Colombes");}
-                if(!controlOlimpica.getTermino()){System.out.println("Adquiero Olimpica"); controlOlimpica.getSemaphoreReloj().acquire(); System.out.println("Quedo Adquirido Olimpica");}
-                if(!controlAmerica.getTermino()){System.out.println("Adquiero America"); controlAmerica.getSemaphoreReloj().acquire(); System.out.println("Quedo Adquirido America");} 
+                tiempoActual.aumentarTiempo();
+                if(!controlAmsterdam.getTermino()){controlAmsterdam.getSemaphoreReloj().acquire();} 
+                if(!controlColombes.getTermino()){controlColombes.getSemaphoreReloj().acquire();}
+                if(!controlOlimpica.getTermino()){controlOlimpica.getSemaphoreReloj().acquire();}
+                if(!controlAmerica.getTermino()){controlAmerica.getSemaphoreReloj().acquire();} 
                 
             
-                if(!controlAmsterdam.getTermino()){System.out.println("Voy a Liberar Amsterdam"); controlAmsterdam.getSemaphore().release(); System.out.println("Libere Amsterdam");} 
-                if(!controlColombes.getTermino()){System.out.println("Voy a Liberar Colombes");  controlColombes.getSemaphore().release();System.out.println("Libere Colombes");}
-                if(!controlOlimpica.getTermino()){ System.out.println("Voy a Liberar Olimpica"); controlOlimpica.getSemaphore().release();System.out.println("Libere Olimpica");}
-                if(!controlAmerica.getTermino()){ System.out.println("Voy a Liberar America");  controlAmerica.getSemaphore().release();System.out.println("Libere America");}  
+                if(!controlAmsterdam.getTermino()){controlAmsterdam.getSemaphore().release();} 
+                if(!controlColombes.getTermino()){controlColombes.getSemaphore().release();}
+                if(!controlOlimpica.getTermino()){controlOlimpica.getSemaphore().release();}
+                if(!controlAmerica.getTermino()){controlAmerica.getSemaphore().release();}  
              }
              catch(InterruptedException ex){
                 ex.printStackTrace();
