@@ -6,6 +6,7 @@
 package prueba;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Semaphore;
 
 public class Tribuna  extends Thread{
@@ -14,19 +15,22 @@ public class Tribuna  extends Thread{
   private Hincha[] hinchasEntrada;
   private int cantidadFuncionarios;
   private ControlTribuna controlDeTribuna;  
-  private ArrayList prioridadEmbarazada;
-  private ArrayList prioridadSocio;
-  private ArrayList prioridadHincha;
-  int indice;
+  private ArrayList<Hincha> prioridadEmbarazada;
+  private ArrayList<Hincha> prioridadSocio;
+  private ArrayList<Hincha> prioridadHincha;
+  private Tiempo tiempo;
+  int indiceEmbarazada;
+  int indiceSocio;
+  int indiceHincha;
   
   public Tribuna(String nombre, Semaphore semaforoReloj, String documentoHinchas, 
-          int cantidadFuncionarios, ControlTribuna controlDeTribuna){
-        this.nombre = nombre;
-        this.hinchasEntrada = cargarHinchas(documentoHinchas);    
+          int cantidadFuncionarios, ControlTribuna controlDeTribuna, Tiempo tiempo){
+        this.nombre = nombre;   
         this.cantidadFuncionarios = cantidadFuncionarios;
         this.semaforoReloj = semaforoReloj;
         this.controlDeTribuna = controlDeTribuna;
         this.indice = 0;
+        this.tiempo = tiempo;
   }
   
   public ArrayList getPrioridadEmbarazada(){return this.prioridadEmbarazada;}
@@ -37,6 +41,7 @@ public class Tribuna  extends Thread{
   //Leo los hinchas de una hinchada y los cargo en el Array
          String[] nombres  = ManejadorArchivosGenerico.leerArchivo(documentoHinchas);
          Hincha[] hinchasEntrada = new Hincha[nombres.length];
+         ArrayList<Hincha> prioridadEmbarazada = new ArrayList<Hincha>();
          String[] lineaActual;
          
          int i=0;
@@ -89,6 +94,10 @@ public class Tribuna  extends Thread{
                       ex.printStackTrace();
                        System.out.println("Error");
             }
+         
+         if (!prioridadEmbarazada.isEmpty() && (tiempo.getTiempo() - prioridadEmbarazada.get(indiceEmbarazada).getHora()) == 0){
+             System.out.println("Se Entro la persona de nombre " + prioridadEmbarazada.get(indiceEmbarazada).getNombre() + " por la tribuna " + this.nombre);
+         }
             System.out.println("Se Entro la persona de nombre " + hinchasEntrada[indice].getNombre() + " por la tribuna " + this.nombre);
             indice++;
             if(indice==hinchasEntrada.length){ this.controlDeTribuna.setTermino(true);}
