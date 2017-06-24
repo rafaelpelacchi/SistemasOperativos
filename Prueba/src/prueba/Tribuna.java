@@ -98,15 +98,15 @@ public class Tribuna  extends Thread{
                        System.out.println("Error");
             }
          
-         if (!prioridadEmbarazada.isEmpty() && (prioridadEmbarazada.get(indiceEmbarazada).getHora() - tiempo.getTiempo()) == 0){
+         if (!prioridadEmbarazada.isEmpty() && indiceEmbarazada < prioridadEmbarazada.size() && (prioridadEmbarazada.get(indiceEmbarazada).getHora() - tiempo.getTiempo()) == 0){
              System.out.println("Se Entro la persona de nombre " + prioridadEmbarazada.get(indiceEmbarazada).getNombre() + " por la tribuna " + this.nombre);
              indiceEmbarazada++;
-         }else if (!prioridadSocio.isEmpty() && (prioridadSocio.get(indiceSocio).getHora() - tiempo.getTiempo()) <= 0 && contadorSocios < 3){
+         }else if (!prioridadSocio.isEmpty() && indiceSocio < prioridadSocio.size() && (prioridadSocio.get(indiceSocio).getHora() - tiempo.getTiempo()) <= 0 && contadorSocios < 3){
              System.out.println("Se Entro la persona de nombre " + prioridadSocio.get(indiceSocio).getNombre() + " por la tribuna " + this.nombre);
              indiceSocio++;
              contadorSocios++;
          }
-         else if (!prioridadHincha.isEmpty() && (prioridadSocio.get(indiceSocio).getHora() - tiempo.getTiempo()) <= 0 && contadorSocios == 3){
+         else if (!prioridadHincha.isEmpty() && indiceHincha < prioridadHincha.size() && (prioridadHincha.get(indiceHincha).getHora() - tiempo.getTiempo()) <= 0){
              System.out.println("Se Entro la persona de nombre " + prioridadHincha.get(indiceHincha).getNombre() + " por la tribuna " + this.nombre);
              indiceHincha++;
              contadorSocios = 0;
