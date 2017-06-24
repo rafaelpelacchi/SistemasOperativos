@@ -26,7 +26,7 @@ public class Tribuna  extends Thread{
   public Tribuna(String nombre, Semaphore semaforoReloj, String documentoHinchas, 
           int cantidadFuncionarios, ControlTribuna controlDeTribuna, Tiempo tiempo){
         this.nombre = nombre;
-        this.cantidadFuncionarios = cantidadFuncionarios;
+        this.cantidadFuncionarios = 1;
         this.semaforoReloj = semaforoReloj;
         this.controlDeTribuna = controlDeTribuna;
         this.tiempo = tiempo;
@@ -92,31 +92,37 @@ public class Tribuna  extends Thread{
       while(!controlDeTribuna.getTermino()){
          try{
                 controlDeTribuna.getSemaphore().acquire();
-            }
-                   catch(InterruptedException ex){
+                Hincha hinchaAuxiliar;
+                for(int i = 0 ; i < this.cantidadFuncionarios ;i++  ){
+                    hinchaAuxiliar = elegirHincha();
+                    System.out.println("El hincha " + hinchaAuxiliar.getNombre() + " Por la tribuna " + this.nombre);
+                }
+                controlDeTribuna.getSemaphoreReloj().release();
+              } catch(InterruptedException ex){
                       ex.printStackTrace();
                        System.out.println("Error");
             }
-         
+    }
+  }
+
+  public Hincha elegirHincha()
+  {
+      Hincha hinchaElegido = new Hincha();
+      
          if (!prioridadEmbarazada.isEmpty() && indiceEmbarazada < prioridadEmbarazada.size() && (prioridadEmbarazada.get(indiceEmbarazada).getHora() - tiempo.getTiempo()) == 0){
-             System.out.println("Se Entro la persona de nombre " + prioridadEmbarazada.get(indiceEmbarazada).getNombre() + " por la tribuna " + this.nombre);
+             hinchaElegido=prioridadEmbarazada.get(indiceEmbarazada);
              indiceEmbarazada++;
          }else if (!prioridadSocio.isEmpty() && indiceSocio < prioridadSocio.size() && (prioridadSocio.get(indiceSocio).getHora() - tiempo.getTiempo()) <= 0 && contadorSocios < 3){
-             System.out.println("Se Entro la persona de nombre " + prioridadSocio.get(indiceSocio).getNombre() + " por la tribuna " + this.nombre);
-             indiceSocio++;
+             hinchaElegido=prioridadSocio.get(indiceSocio);indiceSocio++;
              contadorSocios++;
          }
          else if (!prioridadHincha.isEmpty() && indiceHincha < prioridadHincha.size() && (prioridadHincha.get(indiceHincha).getHora() - tiempo.getTiempo()) <= 0){
-             System.out.println("Se Entro la persona de nombre " + prioridadHincha.get(indiceHincha).getNombre() + " por la tribuna " + this.nombre);
-             indiceHincha++;
+             hinchaElegido=prioridadHincha.get(indiceHincha);indiceHincha++;
              contadorSocios = 0;
-         }
-          
+         }          
             if(indiceEmbarazada == prioridadEmbarazada.size() && indiceSocio == prioridadSocio.size() && indiceHincha  == prioridadHincha.size()){ this.controlDeTribuna.setTermino(true);}
-            controlDeTribuna.getSemaphoreReloj().release();
-            //this.semaforoReloj.release();
-        }
+            
+      return hinchaElegido;
   }
-  
   
 }

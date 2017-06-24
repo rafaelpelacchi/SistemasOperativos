@@ -20,7 +20,7 @@ public class Hincha{
     private boolean accede;
     private boolean leido;
     
-    
+    public Hincha(){}
      /**
   * Constructor de clase Hincha
   *
