@@ -12,7 +12,6 @@ import java.util.concurrent.Semaphore;
 public class Tribuna  extends Thread{
   private String nombre;
   private Semaphore semaforoReloj;
-  private Hincha[] hinchasEntrada;
   private int cantidadFuncionarios;
   private ControlTribuna controlDeTribuna;  
   private ArrayList<Hincha> prioridadEmbarazada;
@@ -22,26 +21,30 @@ public class Tribuna  extends Thread{
   int indiceEmbarazada;
   int indiceSocio;
   int indiceHincha;
+  int contadorSocios;
   
   public Tribuna(String nombre, Semaphore semaforoReloj, String documentoHinchas, 
           int cantidadFuncionarios, ControlTribuna controlDeTribuna, Tiempo tiempo){
-        this.nombre = nombre;   
+        this.nombre = nombre;
         this.cantidadFuncionarios = cantidadFuncionarios;
         this.semaforoReloj = semaforoReloj;
         this.controlDeTribuna = controlDeTribuna;
-        this.indice = 0;
         this.tiempo = tiempo;
+        this.prioridadEmbarazada = new ArrayList<Hincha>();
+        this.prioridadSocio = new ArrayList<Hincha>();
+        this.prioridadHincha = new ArrayList<Hincha>();
+        cargarHinchas(documentoHinchas);
   }
   
-  public ArrayList getPrioridadEmbarazada(){return this.prioridadEmbarazada;}
-  public ArrayList getPrioridadSocio(){return this.prioridadSocio;}
-  public ArrayList getPrioridadHincha(){return this.prioridadHincha;}
+  public ArrayList<Hincha> getPrioridadEmbarazada(){return this.prioridadEmbarazada;}
+  public ArrayList<Hincha> getPrioridadSocio(){return this.prioridadSocio;}
+  public ArrayList<Hincha> getPrioridadHincha(){return this.prioridadHincha;}
   
   private void cargarHinchas(String documentoHinchas){
   //Leo los hinchas de una hinchada y los cargo en el Array
          String[] nombres  = ManejadorArchivosGenerico.leerArchivo(documentoHinchas);
          Hincha[] hinchasEntrada = new Hincha[nombres.length];
-         ArrayList<Hincha> prioridadEmbarazada = new ArrayList<Hincha>();
+         
          String[] lineaActual;
          
          int i=0;
@@ -69,13 +72,13 @@ public class Tribuna  extends Thread{
         }
          for(Hincha h : hinchasEntrada){
              if (h.getPrioridad() == 1){
-                     this.getPrioridadEmbarazada().add(h);
+                     this.prioridadEmbarazada.add(h);
              }
              else if (h.getPrioridad() == 2){
-                 this.getPrioridadSocio().add(h);
+                 this.prioridadSocio.add(h);
              }
              else {
-                 this.getPrioridadHincha().add(h);
+                 this.prioridadHincha.add(h);
              }
          }
          
@@ -95,12 +98,21 @@ public class Tribuna  extends Thread{
                        System.out.println("Error");
             }
          
-         if (!prioridadEmbarazada.isEmpty() && (tiempo.getTiempo() - prioridadEmbarazada.get(indiceEmbarazada).getHora()) == 0){
+         if (!prioridadEmbarazada.isEmpty() && (prioridadEmbarazada.get(indiceEmbarazada).getHora() - tiempo.getTiempo()) == 0){
              System.out.println("Se Entro la persona de nombre " + prioridadEmbarazada.get(indiceEmbarazada).getNombre() + " por la tribuna " + this.nombre);
+             indiceEmbarazada++;
+         }else if (!prioridadSocio.isEmpty() && (prioridadSocio.get(indiceSocio).getHora() - tiempo.getTiempo()) <= 0 && contadorSocios < 3){
+             System.out.println("Se Entro la persona de nombre " + prioridadSocio.get(indiceSocio).getNombre() + " por la tribuna " + this.nombre);
+             indiceSocio++;
+             contadorSocios++;
          }
-            System.out.println("Se Entro la persona de nombre " + hinchasEntrada[indice].getNombre() + " por la tribuna " + this.nombre);
-            indice++;
-            if(indice==hinchasEntrada.length){ this.controlDeTribuna.setTermino(true);}
+         else if (!prioridadHincha.isEmpty() && (prioridadSocio.get(indiceSocio).getHora() - tiempo.getTiempo()) <= 0 && contadorSocios == 3){
+             System.out.println("Se Entro la persona de nombre " + prioridadHincha.get(indiceHincha).getNombre() + " por la tribuna " + this.nombre);
+             indiceHincha++;
+             contadorSocios = 0;
+         }
+          
+            if(indiceEmbarazada == prioridadEmbarazada.size() && indiceSocio == prioridadSocio.size() && indiceHincha  == prioridadHincha.size()){ this.controlDeTribuna.setTermino(true);}
             controlDeTribuna.getSemaphoreReloj().release();
             //this.semaforoReloj.release();
         }
