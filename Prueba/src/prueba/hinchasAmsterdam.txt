@@ -1,5 +1,5 @@
-Rafael,Pelacchi,4.557.956-5,2,1,True,False
-Claudia,Perez,4.557.956-5,1,1,True,False
-Hector,Frizz,4.557.956-5,2,1,True,False
-Sabrina,Humeres,4.557.956-5,3,1,True,False
-Santiago,Aguirre,5.557.956-5,2,1,True,False
+Rafael,Pelacchi,4.557.956-5,2,2,True,False
+Claudia,Perez,4.557.956-5,1,2,True,False
+Hector,Frizz,4.557.956-5,2,2,True,False
+Sabrina,Humeres,4.557.956-5,3,2,True,False
+Santiago,Aguirre,5.557.956-5,2,2,True,False
