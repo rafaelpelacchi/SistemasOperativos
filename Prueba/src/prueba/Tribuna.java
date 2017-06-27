@@ -109,12 +109,14 @@ public class Tribuna  extends Thread{
                 for(int i = 0 ; i < this.cantidadFuncionarios ;i++  ){
                     hinchaAuxiliar = elegirHincha();
                     if (hinchaAuxiliar.getNombre() != null && puedeEntrar(hinchaAuxiliar)){
-                    controlDeTribuna.dejarEntrarHincha(hinchaAuxiliar);                    
+                     hinchaAuxiliar.setHoraEntradaReal(this.tiempo.getTiempo());
+                    controlDeTribuna.dejarEntrarHincha(hinchaAuxiliar, this.nombre);                    
                     System.out.println("Entro " + hinchaAuxiliar.getNombre() + " " + this.nombre);
                     }
                     else{
                         if(hinchaAuxiliar.getNombre() != null && puedeEntrar(hinchaAuxiliar)){
-                         controlDeTribuna.dejarEntrarHincha(hinchaAuxiliar);
+                         hinchaAuxiliar.setHoraEntradaReal(this.tiempo.getTiempo());
+                         controlDeTribuna.dejarEntrarHincha(hinchaAuxiliar, this.nombre);
                          System.out.println("No entro " + hinchaAuxiliar.getNombre()+ " " + this.nombre);}
                     }
                 }

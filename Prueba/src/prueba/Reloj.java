@@ -13,7 +13,7 @@ import java.util.concurrent.Semaphore;
  * a que todas tribunas dejen entrar a un hincha por funcionario. Esto representará un segundo
  */
 public class Reloj extends Thread{
-    private Semaphore semaforoReloj;
+    private Semaphore semaforoFin;
     private Tiempo tiempoActual;
     private ControlTribuna controlAmsterdam;
     private ControlTribuna controlColombes;
@@ -21,12 +21,12 @@ public class Reloj extends Thread{
     private ControlTribuna controlAmerica;
     
     public Reloj(ControlTribuna controlAmsterdam, ControlTribuna controlColombes, ControlTribuna controlOlimpica, 
-            ControlTribuna controlAmerica, Tiempo tiempoActual){
+            ControlTribuna controlAmerica, Tiempo tiempoActual, Semaphore semaforoFin){
         this.controlAmsterdam = controlAmsterdam;
         this.controlColombes = controlColombes;
         this.controlOlimpica = controlOlimpica;
         this.controlAmerica = controlAmerica;
-        this.semaforoReloj = semaforoReloj;
+        this.semaforoFin = semaforoFin;
         this.tiempoActual = tiempoActual;
     }
         
@@ -53,7 +53,7 @@ public class Reloj extends Thread{
                 ex.printStackTrace();
             }
          }
-         System.out.println("Se termino!");
+         this.semaforoFin.release();
     }
     
     public boolean hayMasHinchas(){ 

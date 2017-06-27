@@ -28,20 +28,20 @@ public class ControlTribuna {
     public Semaphore getSemaphore(){ return this.semaforoTribuna; }
     public Semaphore getSemaphoreReloj(){ return this.semaforoTribunaReloj;}
     
-    public void dejarEntrarHincha(Hincha entrarHincha){
+    public void dejarEntrarHincha(Hincha entrarHincha, String tribuna){
         try{
               salidaPrograma.getSemaforoSalida().acquire();
-              salidaPrograma.hacerEntrarHincha(entrarHincha);
+              salidaPrograma.hacerEntrarHincha(entrarHincha, tribuna);
               salidaPrograma.getSemaforoSalida().release();
               } catch(InterruptedException ex){
                       ex.printStackTrace();
                        System.out.println("Error");
             }
     }
-    public void denegarEntradaHincha(Hincha entrarHincha){
+    public void denegarEntradaHincha(Hincha entrarHincha,String tribuna){
         try{
               salidaPrograma.getSemaforoSalida().acquire();
-              salidaPrograma.noDejarPasarHincha(entrarHincha);
+              salidaPrograma.noDejarPasarHincha(entrarHincha, tribuna);
               salidaPrograma.getSemaforoSalida().release();
               } catch(InterruptedException ex){
                       ex.printStackTrace();

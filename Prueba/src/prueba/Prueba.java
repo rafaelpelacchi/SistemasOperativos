@@ -33,7 +33,7 @@ public class Prueba {
          Semaphore semaforoOlimpicaReloj = new Semaphore(1);
          Semaphore semaforoAmericaReloj = new Semaphore(1);
          
-         
+         Semaphore semaforoFin = new Semaphore(1);
          //Declaro mis controladores de Tribunas(Se crean con el valor de Falso ya que marcaran 
          //cuando no haya mas hinchas para procesar) tambien se les pasa el semaforo para habilitar
          //el método run de las tribunas.
@@ -45,14 +45,15 @@ public class Prueba {
          
          Tiempo tiempoActual = new Tiempo(-1);
          
+         
          //Declaro mi reloj, dandole los semaforos de cada hinchada junto a sus 
-         Reloj miReloj = new Reloj(datosAmsterdam,datosColombes,datosOlimpica,datosAmerica, tiempoActual);
+         Reloj miReloj = new Reloj(datosAmsterdam,datosColombes,datosOlimpica,datosAmerica, tiempoActual,semaforoFin);
          Tribuna amsterdam = new Tribuna("Amsterdam","src/prueba/hinchasAmsterdam.txt", 4, datosAmsterdam, tiempoActual);
          Tribuna colombes = new Tribuna("Colombes","src/prueba/hinchasColombes.txt", 4, datosColombes, tiempoActual);
          Tribuna olimpica = new Tribuna("Olimpica","src/prueba/hinchasOlimpica.txt", 4, datosOlimpica, tiempoActual);
          Tribuna america = new Tribuna("America","src/prueba/hinchasAmerica.txt", 4, datosAmerica, tiempoActual);
          
-         Estadio estadioCentenario = new Estadio("Estadio Centenario",amsterdam,colombes,olimpica,america,miReloj);
+         Estadio estadioCentenario = new Estadio("Estadio Centenario",amsterdam,colombes,olimpica,america,miReloj,semaforoFin, salidaDatos);
          
          estadioCentenario.hacerEntrarGente();
     }

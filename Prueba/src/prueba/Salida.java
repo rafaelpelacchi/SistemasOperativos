@@ -5,6 +5,7 @@
  */
 package prueba;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.Semaphore;
 
@@ -14,21 +15,21 @@ import java.util.concurrent.Semaphore;
  */
 public class Salida {
     private Semaphore semaforoSalida;
-    private LinkedList<Hincha> hinchasQueEntraron;
-    private LinkedList<Hincha>  hinchasQueNoEntraron;
+    private LinkedList<String> hinchasQueEntraron;
+    private LinkedList<String>  hinchasQueNoEntraron;
     
     public Salida(){
         this.semaforoSalida = new Semaphore(1);
-        hinchasQueEntraron= new LinkedList<Hincha>();
-        hinchasQueNoEntraron= new LinkedList<Hincha>();
+        hinchasQueEntraron= new LinkedList<String>();
+        hinchasQueNoEntraron= new LinkedList<String>();
     }
     
-    public void hacerEntrarHincha(Hincha entrarHincha){
-        hinchasQueEntraron.add(entrarHincha);
+    public void hacerEntrarHincha(Hincha entrarHincha, String tribuna){
+        hinchasQueEntraron.add("Entro el hincha " + entrarHincha.getNombre() + " a la hora " + entrarHincha.getHoraEntradaReal() + " por la puerta " + tribuna);
     }
     
-    public void noDejarPasarHincha(Hincha entrarHincha){
-        hinchasQueNoEntraron.add(entrarHincha);
+    public void noDejarPasarHincha(Hincha entrarHincha, String tribuna){
+        hinchasQueNoEntraron.add("Se le nego la entrada el hincha " + entrarHincha.getNombre() + " a la hora " + entrarHincha.getHoraEntradaReal() + " por la puerta " + tribuna);
     }
 
     public Semaphore getSemaforoSalida() {
@@ -39,5 +40,15 @@ public class Salida {
         this.semaforoSalida = semaforoSalida;
     }
     
+    public ArrayList<String> retornarHinchasEntraror(){
+          ArrayList<String> retorno = new ArrayList<String>(); 
+          retorno.addAll(this.hinchasQueEntraron);
+          return retorno;
+    }
     
+    public ArrayList<String> retornarHinchasNoEntraror(){
+    ArrayList<String> retorno = new ArrayList<String>(); 
+          retorno.addAll(this.hinchasQueNoEntraron);
+          return retorno;
+    }
 }
