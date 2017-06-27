@@ -11,7 +11,6 @@ import java.util.concurrent.Semaphore;
 
 public class Tribuna  extends Thread{
   private String nombre;
-  private Semaphore semaforoReloj;
   private int cantidadFuncionarios;
   private ControlTribuna controlDeTribuna;  
   private ArrayList<Hincha> prioridadEmbarazada;
@@ -27,11 +26,10 @@ public class Tribuna  extends Thread{
   int contadorSocios;
   Procesador[] misProcesadores;
   
-  public Tribuna(String nombre, Semaphore semaforoReloj, String documentoHinchas, 
+  public Tribuna(String nombre, String documentoHinchas, 
           int cantidadFuncionarios, ControlTribuna controlDeTribuna, Tiempo tiempo){
         this.nombre = nombre;
         this.cantidadFuncionarios = 1;
-        this.semaforoReloj = semaforoReloj;
         this.controlDeTribuna = controlDeTribuna;
         this.tiempo = tiempo;
         this.prioridadEmbarazada = new ArrayList<Hincha>();
@@ -110,8 +108,14 @@ public class Tribuna  extends Thread{
                 
                 for(int i = 0 ; i < this.cantidadFuncionarios ;i++  ){
                     hinchaAuxiliar = elegirHincha();
-                    if (hinchaAuxiliar.getNombre() != null){
-                    System.out.println("El hincha " + hinchaAuxiliar.getNombre() + " Por la tribuna " + this.nombre);
+                    if (hinchaAuxiliar.getNombre() != null && puedeEntrar(hinchaAuxiliar)){
+                    controlDeTribuna.dejarEntrarHincha(hinchaAuxiliar);                    
+                    System.out.println("Entro " + hinchaAuxiliar.getNombre() + " " + this.nombre);
+                    }
+                    else{
+                        if(hinchaAuxiliar.getNombre() != null && puedeEntrar(hinchaAuxiliar)){
+                         controlDeTribuna.dejarEntrarHincha(hinchaAuxiliar);
+                         System.out.println("No entro " + hinchaAuxiliar.getNombre()+ " " + this.nombre);}
                     }
                 }
                 controlDeTribuna.getSemaphoreReloj().release();
@@ -155,4 +159,9 @@ public class Tribuna  extends Thread{
          }          
       return hinchaElegido;
   }
+    
+    public boolean puedeEntrar(Hincha hinchaActual){
+        if(!hinchaActual.getAccede() && hinchaActual.getLeido()) return false;
+        else return true;
+    }
 }

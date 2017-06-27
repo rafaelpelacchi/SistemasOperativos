@@ -33,25 +33,24 @@ public class Prueba {
          Semaphore semaforoOlimpicaReloj = new Semaphore(1);
          Semaphore semaforoAmericaReloj = new Semaphore(1);
          
-         //Declaro el semaforo de mi reloj (En 1, de lo contrario nunca comenzaría )
-         Semaphore semaforoReloj = new Semaphore(1);
          
          //Declaro mis controladores de Tribunas(Se crean con el valor de Falso ya que marcaran 
          //cuando no haya mas hinchas para procesar) tambien se les pasa el semaforo para habilitar
          //el método run de las tribunas.
-         ControlTribuna datosAmsterdam = new ControlTribuna(false, semaforoAmsterdam,semaforoAmsterdamReloj);
-         ControlTribuna datosColombes = new ControlTribuna(false,semaforoColombes,semaforoColombesReloj);
-         ControlTribuna datosOlimpica = new ControlTribuna(false, semaforoOlimpica,semaforoOlimpicaReloj);
-         ControlTribuna datosAmerica = new ControlTribuna(false, semaforoAmerica, semaforoAmericaReloj);
+         Salida salidaDatos = new Salida();
+         ControlTribuna datosAmsterdam = new ControlTribuna(false, semaforoAmsterdam,semaforoAmsterdamReloj, salidaDatos);
+         ControlTribuna datosColombes = new ControlTribuna(false,semaforoColombes,semaforoColombesReloj, salidaDatos);
+         ControlTribuna datosOlimpica = new ControlTribuna(false, semaforoOlimpica,semaforoOlimpicaReloj, salidaDatos);
+         ControlTribuna datosAmerica = new ControlTribuna(false, semaforoAmerica, semaforoAmericaReloj, salidaDatos);
          
          Tiempo tiempoActual = new Tiempo(-1);
          
          //Declaro mi reloj, dandole los semaforos de cada hinchada junto a sus 
-         Reloj miReloj = new Reloj(semaforoAmsterdam, semaforoReloj, datosAmsterdam,datosColombes,datosOlimpica,datosAmerica, tiempoActual);
-         Tribuna amsterdam = new Tribuna("Amsterdam", semaforoReloj,"src/prueba/hinchasAmsterdam.txt", 4, datosAmsterdam, tiempoActual);
-         Tribuna colombes = new Tribuna("Colombes", semaforoReloj,"src/prueba/hinchasColombes.txt", 4, datosColombes, tiempoActual);
-         Tribuna olimpica = new Tribuna("Olimpica", semaforoReloj,"src/prueba/hinchasOlimpica.txt", 4, datosOlimpica, tiempoActual);
-         Tribuna america = new Tribuna("America", semaforoReloj,"src/prueba/hinchasAmerica.txt", 4, datosAmerica, tiempoActual);
+         Reloj miReloj = new Reloj(datosAmsterdam,datosColombes,datosOlimpica,datosAmerica, tiempoActual);
+         Tribuna amsterdam = new Tribuna("Amsterdam","src/prueba/hinchasAmsterdam.txt", 4, datosAmsterdam, tiempoActual);
+         Tribuna colombes = new Tribuna("Colombes","src/prueba/hinchasColombes.txt", 4, datosColombes, tiempoActual);
+         Tribuna olimpica = new Tribuna("Olimpica","src/prueba/hinchasOlimpica.txt", 4, datosOlimpica, tiempoActual);
+         Tribuna america = new Tribuna("America","src/prueba/hinchasAmerica.txt", 4, datosAmerica, tiempoActual);
          
          Estadio estadioCentenario = new Estadio("Estadio Centenario",amsterdam,colombes,olimpica,america,miReloj);
          

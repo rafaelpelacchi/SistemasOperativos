@@ -20,8 +20,8 @@ public class Reloj extends Thread{
     private ControlTribuna controlOlimpica;
     private ControlTribuna controlAmerica;
     
-    public Reloj(Semaphore semaforoAmsterdam, Semaphore semaforoReloj, ControlTribuna controlAmsterdam
-                , ControlTribuna controlColombes, ControlTribuna controlOlimpica, ControlTribuna controlAmerica, Tiempo tiempoActual){
+    public Reloj(ControlTribuna controlAmsterdam, ControlTribuna controlColombes, ControlTribuna controlOlimpica, 
+            ControlTribuna controlAmerica, Tiempo tiempoActual){
         this.controlAmsterdam = controlAmsterdam;
         this.controlColombes = controlColombes;
         this.controlOlimpica = controlOlimpica;

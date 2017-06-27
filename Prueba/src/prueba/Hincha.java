@@ -16,7 +16,8 @@ public class Hincha{
     private String apellido;
     private String cedula;
     private int prioridad; // 1- Embarazada 2- Socios 3- Hinchas Normales
-    private int hora;
+    private int hora; // Hora en la que hubiera entrado el hincha si no hubiera prioridades
+    private int horaEntradaReal; // Hora real en la que entro el hincha
     private boolean accede;
     private boolean leido;
     
@@ -63,6 +64,9 @@ public class Hincha{
     
     public boolean getLeido(){ return this.leido; }
     public void setLeido(boolean leido){ this.leido = leido;}
+    
+     public int getHoraEntradaReal() { return horaEntradaReal; }
+    public void setHoraEntradaReal(int horaEntradaReal) { this.horaEntradaReal = horaEntradaReal; }
     
     
 }
