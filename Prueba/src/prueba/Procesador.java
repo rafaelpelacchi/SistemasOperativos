@@ -9,29 +9,18 @@ package prueba;
  *
  * @author Usuario
  */
-public class Procesador  extends Thread {
+public class Procesador{
     //El hincha procesando es el hinca que el hilo esta agreagndo al buffer del centro de operaciones
     //Se usa en el método Run
     
-    private Hincha procesando;
-    
-    public Hincha getHincha(){
-        return this.procesando;
-    }
-   
-    public void setHincha(Hincha procesando){
-        this.procesando = procesando;
+    private CentroOperaciones centroDeOperaciones;
+    public Procesador(CentroOperaciones centroDeOperaciones){
+        this.centroDeOperaciones = centroDeOperaciones;
     }
     
     //Envia a las personas al centro de operaciones para que este analice si entra o no.
     public void procesarImagen(Hincha hinchaEntrando){
-        hinchaEntrando.setLeido(true);
+        centroDeOperaciones.agregarHinchaAProcesar(hinchaEntrando);
     }
-    
-    @Override
-    public void run(){
-        procesarImagen(this.procesando);
-    }
-    
-    
+      
 }

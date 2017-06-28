@@ -45,15 +45,15 @@ public class Prueba {
          
          Tiempo tiempoActual = new Tiempo(-1);
          
-         
+         CentroOperaciones centroDeOperaciones = new CentroOperaciones(semaforoFin);
          //Declaro mi reloj, dandole los semaforos de cada hinchada junto a sus 
          Reloj miReloj = new Reloj(datosAmsterdam,datosColombes,datosOlimpica,datosAmerica, tiempoActual,semaforoFin);
-         Tribuna amsterdam = new Tribuna("Amsterdam","src/prueba/hinchasAmsterdam.txt", 4, datosAmsterdam, tiempoActual);
-         Tribuna colombes = new Tribuna("Colombes","src/prueba/hinchasColombes.txt", 4, datosColombes, tiempoActual);
-         Tribuna olimpica = new Tribuna("Olimpica","src/prueba/hinchasOlimpica.txt", 4, datosOlimpica, tiempoActual);
-         Tribuna america = new Tribuna("America","src/prueba/hinchasAmerica.txt", 4, datosAmerica, tiempoActual);
+         Tribuna amsterdam = new Tribuna("Amsterdam","src/prueba/hinchasAmsterdam.txt", 4, datosAmsterdam, tiempoActual,centroDeOperaciones);
+         Tribuna colombes = new Tribuna("Colombes","src/prueba/hinchasColombes.txt", 4, datosColombes, tiempoActual,centroDeOperaciones);
+         Tribuna olimpica = new Tribuna("Olimpica","src/prueba/hinchasOlimpica.txt", 4, datosOlimpica, tiempoActual,centroDeOperaciones);
+         Tribuna america = new Tribuna("America","src/prueba/hinchasAmerica.txt", 4, datosAmerica, tiempoActual,centroDeOperaciones);
          
-         Estadio estadioCentenario = new Estadio("Estadio Centenario",amsterdam,colombes,olimpica,america,miReloj,semaforoFin, salidaDatos);
+         Estadio estadioCentenario = new Estadio("Estadio Centenario",amsterdam,colombes,olimpica,america,miReloj,semaforoFin, salidaDatos,centroDeOperaciones);
          
          estadioCentenario.hacerEntrarGente();
     }

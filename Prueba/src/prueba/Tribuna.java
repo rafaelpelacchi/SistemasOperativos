@@ -27,7 +27,7 @@ public class Tribuna  extends Thread{
   Procesador[] misProcesadores;
   
   public Tribuna(String nombre, String documentoHinchas, 
-          int cantidadFuncionarios, ControlTribuna controlDeTribuna, Tiempo tiempo){
+          int cantidadFuncionarios, ControlTribuna controlDeTribuna, Tiempo tiempo,CentroOperaciones centroDeOperaciones){
         this.nombre = nombre;
         this.cantidadFuncionarios = 1;
         this.controlDeTribuna = controlDeTribuna;
@@ -38,7 +38,7 @@ public class Tribuna  extends Thread{
         cargarHinchas(documentoHinchas);
         misProcesadores = new Procesador[1];
         for(int i =0 ; i <1 ;i ++){
-            misProcesadores[i] = new Procesador();
+            misProcesadores[i] = new Procesador( centroDeOperaciones);
         }
   }
   
@@ -101,9 +101,9 @@ public class Tribuna  extends Thread{
                 Hincha hinchaAuxiliar;
                 for(int i = 0 ; i < this.misProcesadores.length ;i++  ){
                     hinchaAuxiliar = elegirHinchaCamara();
-                    Procesador aux = new Procesador();
-                    aux.setHincha(hinchaAuxiliar);
-                    aux.start();                         
+                    if (hinchaAuxiliar.getNombre() != null){
+                         this.misProcesadores[i].procesarImagen(hinchaAuxiliar);                    
+                    }
                 }
                 
                 for(int i = 0 ; i < this.cantidadFuncionarios ;i++  ){
@@ -111,13 +111,13 @@ public class Tribuna  extends Thread{
                     if (hinchaAuxiliar.getNombre() != null && puedeEntrar(hinchaAuxiliar)){
                      hinchaAuxiliar.setHoraEntradaReal(this.tiempo.getTiempo());
                     controlDeTribuna.dejarEntrarHincha(hinchaAuxiliar, this.nombre);                    
-                    System.out.println("Entro " + hinchaAuxiliar.getNombre() + " " + this.nombre);
+                    System.out.println("Entro " + hinchaAuxiliar.getNombre() + " " + this.nombre + " " + Boolean.toString(hinchaAuxiliar.getLeido()));
                     }
                     else{
                         if(hinchaAuxiliar.getNombre() != null && puedeEntrar(hinchaAuxiliar)){
                          hinchaAuxiliar.setHoraEntradaReal(this.tiempo.getTiempo());
                          controlDeTribuna.dejarEntrarHincha(hinchaAuxiliar, this.nombre);
-                         System.out.println("No entro " + hinchaAuxiliar.getNombre()+ " " + this.nombre);}
+                         System.out.println("No entro " + hinchaAuxiliar.getNombre()+ " " + this.nombre + " " + Boolean.toString(hinchaAuxiliar.getLeido()));}
                     }
                 }
                 controlDeTribuna.getSemaphoreReloj().release();

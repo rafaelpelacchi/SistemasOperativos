@@ -18,19 +18,21 @@ public class Estadio extends Thread {
    private Tribuna olimpica;
    private Tribuna america;
    private Reloj miReloj;
-   private Semaphore semaforoImprimirReporte;
+   private Semaphore semaforoFin;
    private Salida salidaDelPrograma;
+   private CentroOperaciones centroDeOperaciones;
    
    public Estadio(String nombre,Tribuna amsterdam,Tribuna colombes,Tribuna olimpica,Tribuna america, 
-           Reloj miReloj,Semaphore semaforoImprimirReporte, Salida salidaDelPrograma){
+           Reloj miReloj,Semaphore semaforoFin, Salida salidaDelPrograma,CentroOperaciones centroDeOperaciones){
        this.nombre = nombre;
        this.amsterdam = amsterdam;
        this.colombes = colombes;
        this.olimpica = olimpica;
        this.america = america;
        this.miReloj = miReloj;
-       this.semaforoImprimirReporte=semaforoImprimirReporte;
+       this.semaforoFin=semaforoFin;
        this.salidaDelPrograma=salidaDelPrograma;
+       this.centroDeOperaciones = centroDeOperaciones;
    }
    
    public void imprimirReporte(){
@@ -41,13 +43,14 @@ public class Estadio extends Thread {
    public void hacerEntrarGente(){
        
        try{
-            this.semaforoImprimirReporte.acquire();
+            this.semaforoFin.acquire();
             this.miReloj.start();
             this.amsterdam.start();
             this.colombes.start();
             this.olimpica.start();
             this.america.start();
-            this.semaforoImprimirReporte.acquire();
+            this.centroDeOperaciones.start();
+            this.semaforoFin.acquire();
             imprimirReporte();
             
               } catch(InterruptedException ex){
