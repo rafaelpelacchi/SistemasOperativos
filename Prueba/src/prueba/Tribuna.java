@@ -107,7 +107,9 @@ public class Tribuna  extends Thread{
                          this.misProcesadores[i].procesarImagen(hinchaAuxiliar);                    
                     }
                 }
-                
+                // 
+                if(tiempo.getTiempo()%2 == 0)
+                {
                 for(int i = 0 ; i < this.cantidadFuncionarios ;i++  ){
                     hinchaAuxiliar = elegirHincha();
                     if (hinchaAuxiliar.getNombre() != null && puedeEntrar(hinchaAuxiliar)){
@@ -121,6 +123,7 @@ public class Tribuna  extends Thread{
                          controlDeTribuna.denegarEntradaHincha(hinchaAuxiliar, this.nombre);
                          System.out.println("No entro " + hinchaAuxiliar.getNombre()+ " " + this.nombre + " " + Boolean.toString(hinchaAuxiliar.getLeido()));}
                     }
+                }
                 }
                 controlDeTribuna.getSemaphoreReloj().release();
               } catch(InterruptedException ex){
