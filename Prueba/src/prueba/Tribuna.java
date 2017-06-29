@@ -24,6 +24,7 @@ public class Tribuna  extends Thread{
   int indiceSocioCamara;
   int indiceHinchaCamara;
   int contadorSocios;
+  CentroOperaciones centroDeOperaciones;
   Procesador[] misProcesadores;
   
   public Tribuna(String nombre, String documentoHinchas, 
@@ -32,13 +33,14 @@ public class Tribuna  extends Thread{
         this.cantidadFuncionarios = 1;
         this.controlDeTribuna = controlDeTribuna;
         this.tiempo = tiempo;
+        this.centroDeOperaciones = centroDeOperaciones;
         this.prioridadEmbarazada = new ArrayList<Hincha>();
         this.prioridadSocio = new ArrayList<Hincha>();
         this.prioridadHincha = new ArrayList<Hincha>();
         cargarHinchas(documentoHinchas);
-        misProcesadores = new Procesador[1];
-        for(int i =0 ; i <1 ;i ++){
-            misProcesadores[i] = new Procesador( centroDeOperaciones);
+        misProcesadores = new Procesador[2];
+        for(int i =0 ; i <misProcesadores.length ;i ++){
+            misProcesadores[i] = new Procesador(centroDeOperaciones);
         }
   }
   
@@ -114,9 +116,9 @@ public class Tribuna  extends Thread{
                     System.out.println("Entro " + hinchaAuxiliar.getNombre() + " " + this.nombre + " " + Boolean.toString(hinchaAuxiliar.getLeido()));
                     }
                     else{
-                        if(hinchaAuxiliar.getNombre() != null && puedeEntrar(hinchaAuxiliar)){
+                        if(hinchaAuxiliar.getNombre() != null && !puedeEntrar(hinchaAuxiliar)){
                          hinchaAuxiliar.setHoraEntradaReal(this.tiempo.getTiempo());
-                         controlDeTribuna.dejarEntrarHincha(hinchaAuxiliar, this.nombre);
+                         controlDeTribuna.denegarEntradaHincha(hinchaAuxiliar, this.nombre);
                          System.out.println("No entro " + hinchaAuxiliar.getNombre()+ " " + this.nombre + " " + Boolean.toString(hinchaAuxiliar.getLeido()));}
                     }
                 }
@@ -126,6 +128,12 @@ public class Tribuna  extends Thread{
                        System.out.println("Error");
             }
     }
+      switch(this.nombre){
+          case "Amsterdam": this.centroDeOperaciones.setTerminoAmsterdam(true);break;
+          case "Colombes":  this.centroDeOperaciones.setTerminoColombes(true);break;
+          case "Olimpica":  this.centroDeOperaciones.setTerminoOlimpica(true);break;
+          case "America":   this.centroDeOperaciones.setTerminoAmerica(true);break;
+      }
   }
 
   public Hincha elegirHincha()

@@ -18,6 +18,11 @@ import java.util.logging.Logger;
 public class CentroOperaciones extends Thread {
  public Semaphore semaforoOperaciones;
  Semaphore semaforoFin;
+ Semaphore semaforoHabilitarInsercion;
+ private boolean terminoAmsterdam;
+ private boolean terminoColombes;
+ private boolean terminoOlimpica;
+ private boolean terminoAmerica;
  LinkedList<Hincha> hinchasAProcesar;
 
  
@@ -25,28 +30,59 @@ public class CentroOperaciones extends Thread {
      this.semaforoOperaciones = new Semaphore(0);
      this.hinchasAProcesar = new LinkedList<Hincha>();
     this.semaforoFin = semaforoFin;
+    this.semaforoHabilitarInsercion = new Semaphore(1);
+    this.terminoAmsterdam = false;
+    this.terminoColombes = false;
+    this.terminoAmerica = false;
+    this.terminoOlimpica = false;
+    
             }
  
  public void agregarHinchaAProcesar(Hincha nuevoHincha){
      if(nuevoHincha!=null){
-        this.hinchasAProcesar.addLast(nuevoHincha);
-        this.semaforoOperaciones.release();
+         try {
+             this.semaforoHabilitarInsercion.acquire();
+             this.hinchasAProcesar.addLast(nuevoHincha);
+             this.semaforoHabilitarInsercion.release();
+             this.semaforoOperaciones.release();
+         } catch (InterruptedException ex) {
+             Logger.getLogger(CentroOperaciones.class.getName()).log(Level.SEVERE, null, ex);
+         }
      }
  }
+
+    public void setTerminoAmsterdam(boolean terminoAmsterdam) {
+        this.terminoAmsterdam = terminoAmsterdam;
+    }
+
+    public void setTerminoColombes(boolean terminoColombes) {
+        this.terminoColombes = terminoColombes;
+    }
+
+    public void setTerminoOlimpica(boolean terminoOlimpica) {
+        this.terminoOlimpica = terminoOlimpica;
+    }
+
+    public void setTerminoAmerica(boolean terminoAmerica) {
+        this.terminoAmerica = terminoAmerica;
+    }
  
  @Override
  public void run(){
-         while(true){
-         try{
-         this.semaforoOperaciones.acquire();
-          Hincha hinchaAux = this.hinchasAProcesar.getFirst();
-          hinchaAux.setLeido(true);
-          this.hinchasAProcesar.removeFirst();
-         } catch(InterruptedException ex){
-             ex.printStackTrace();
-                       System.out.println("Error");
-         }
-         }
-          
+         while(hayMasHinchas()){
+            try{
+            this.semaforoOperaciones.acquire();
+             Hincha hinchaAux = this.hinchasAProcesar.getFirst();
+             hinchaAux.setLeido(true);
+             this.hinchasAProcesar.removeFirst();
+            } catch(InterruptedException ex){
+                ex.printStackTrace();
+                          System.out.println("Error");
+            }
+         }          
  }
+ 
+     public boolean hayMasHinchas(){ 
+        return !(terminoAmsterdam && terminoColombes && terminoOlimpica && terminoAmerica );
+    }
 }

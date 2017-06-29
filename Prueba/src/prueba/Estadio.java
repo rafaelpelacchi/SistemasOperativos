@@ -37,7 +37,7 @@ public class Estadio extends Thread {
    
    public void imprimirReporte(){
        ManejadorArchivosGenerico.escribirArchivo("src/prueba/HinchasEntraron.txt", salidaDelPrograma.retornarHinchasEntraror());
-       ManejadorArchivosGenerico.escribirArchivo("src/prueba/HinchasEntraron.txt", salidaDelPrograma.retornarHinchasNoEntraror());
+       ManejadorArchivosGenerico.escribirArchivo("src/prueba/HinchasNoEntraron.txt", salidaDelPrograma.retornarHinchasNoEntraror());
    }
    
    public void hacerEntrarGente(){
