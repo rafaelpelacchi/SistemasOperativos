@@ -28,9 +28,9 @@ public class Tribuna  extends Thread{
   Camara[] misCamaras;
   
   public Tribuna(String nombre, String documentoHinchas, 
-          int cantidadFuncionarios, ControlTribuna controlDeTribuna, Tiempo tiempo,CentroOperaciones centroDeOperaciones){
+          int cantidadFuncionarios,int cantFuncionarios,int cantCamaras, ControlTribuna controlDeTribuna, Tiempo tiempo,CentroOperaciones centroDeOperaciones){
         this.nombre = nombre;
-        this.cantidadFuncionarios = 1;
+        this.cantidadFuncionarios = cantFuncionarios;
         this.controlDeTribuna = controlDeTribuna;
         this.tiempo = tiempo;
         this.centroDeOperaciones = centroDeOperaciones;
@@ -38,7 +38,7 @@ public class Tribuna  extends Thread{
         this.prioridadSocio = new ArrayList<Hincha>();
         this.prioridadHincha = new ArrayList<Hincha>();
         cargarHinchas(documentoHinchas);
-        misCamaras = new Camara[1];
+        misCamaras = new Camara[cantCamaras];
         for(int i =0 ; i <misCamaras.length ;i ++){
             misCamaras[i] = new Camara(centroDeOperaciones);
         }
