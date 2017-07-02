@@ -5,6 +5,7 @@
  */
 package SistemasOperativos;
 
+import static java.time.Clock.*;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -52,7 +53,7 @@ public class Estadio extends Thread {
             this.centroDeOperaciones.start();
             this.semaforoFin.acquire();
             imprimirReporte();
-            
+            System.exit(0);
               } catch(InterruptedException ex){
                       ex.printStackTrace();
                        System.out.println("Error");

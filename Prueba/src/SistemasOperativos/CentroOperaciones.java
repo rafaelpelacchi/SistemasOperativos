@@ -69,8 +69,10 @@ public class CentroOperaciones extends Thread {
          while(hayMasHinchas()){
             try{
             this.semaforoOperaciones.acquire();
+            try{
              Hincha hinchaAux = this.hinchasAProcesar.getFirst();
              hinchaAux.setLeido(true);
+             }catch(java.util.NoSuchElementException ex){System.out.println("a");}
              this.hinchasAProcesar.removeFirst();
             } catch(InterruptedException ex){
                 ex.printStackTrace();
