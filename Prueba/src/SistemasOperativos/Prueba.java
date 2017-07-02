@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package prueba;
+package SistemasOperativos;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,15 +43,15 @@ public class Prueba {
          ControlTribuna datosOlimpica = new ControlTribuna(false, semaforoOlimpica,semaforoOlimpicaReloj, salidaDatos);
          ControlTribuna datosAmerica = new ControlTribuna(false, semaforoAmerica, semaforoAmericaReloj, salidaDatos);
          
-         Tiempo tiempoActual = new Tiempo(-1);
+         Tiempo tiempoActual = new Tiempo(0);
          
-         CentroOperaciones centroDeOperaciones = new CentroOperaciones(semaforoFin);
+         CentroOperaciones centroDeOperaciones = new CentroOperaciones();
          //Declaro mi reloj, dandole los semaforos de cada hinchada junto a sus 
          Reloj miReloj = new Reloj(datosAmsterdam,datosColombes,datosOlimpica,datosAmerica, tiempoActual,semaforoFin);
-         Tribuna amsterdam = new Tribuna("Amsterdam","src/prueba/hinchasAmsterdam.txt", 4, datosAmsterdam, tiempoActual,centroDeOperaciones);
-         Tribuna colombes = new Tribuna("Colombes","src/prueba/hinchasColombes.txt", 4, datosColombes, tiempoActual,centroDeOperaciones);
-         Tribuna olimpica = new Tribuna("Olimpica","src/prueba/hinchasOlimpica.txt", 4, datosOlimpica, tiempoActual,centroDeOperaciones);
-         Tribuna america = new Tribuna("America","src/prueba/hinchasAmerica.txt", 4, datosAmerica, tiempoActual,centroDeOperaciones);
+         Tribuna amsterdam = new Tribuna("Amsterdam","src/SistemasOperativos/hinchasAmsterdamPocos.txt", 4, datosAmsterdam, tiempoActual,centroDeOperaciones);
+         Tribuna colombes = new Tribuna("Colombes","src/SistemasOperativos/hinchasColombesPocos.txt", 4, datosColombes, tiempoActual,centroDeOperaciones);
+         Tribuna olimpica = new Tribuna("Olimpica","src/SistemasOperativos/hinchasOlimpicaPocos.txt", 4, datosOlimpica, tiempoActual,centroDeOperaciones);
+         Tribuna america = new Tribuna("America","src/SistemasOperativos/hinchasAmericaPocos.txt", 4, datosAmerica, tiempoActual,centroDeOperaciones);
          
          Estadio estadioCentenario = new Estadio("Estadio Centenario",amsterdam,colombes,olimpica,america,miReloj,semaforoFin, salidaDatos,centroDeOperaciones);
          

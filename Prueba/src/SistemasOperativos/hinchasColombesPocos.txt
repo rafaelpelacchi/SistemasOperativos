@@ -2,5 +2,5 @@ Claudia ,Mank,4.234.111-5,1,10,False,False
 Sofia,Perez,4.546.412-5,2,10,True,False
 Alejandro,Mentra,4.112.657-5,2,10,False,False
 Reynaldo,Viana,4.665.366-5,3,10,True,False
-Diego,Navarro,4.879.956-5,2,10,True,False
-Alexis,Mas,4.879.956-5,2,10,True,False
+Diego,Navarro,4.879.956-5,3,10,True,False
+Alexis,Mas,4.879.956-5,3,10,True,False

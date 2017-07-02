@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package prueba;
+package SistemasOperativos;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -33,7 +33,7 @@ public class Salida {
     public void hacerEntrarHincha(Hincha entrarHincha, String tribuna){
         try {
             this.semaforoDejarPasar.acquire();
-            this.hinchasQueEntraron.add("Entro el hincha " + entrarHincha.getNombre() + " a la hora " + entrarHincha.getHoraEntradaReal() + " por la puerta " + tribuna);
+            this.hinchasQueEntraron.add("Entro el hincha " + entrarHincha.getNombre()+" " + entrarHincha.getApellido() + " a la hora " + entrarHincha.getHoraEntradaReal() + " por la puerta " + tribuna);
             this.semaforoDejarPasar.release();
         } catch (InterruptedException ex) {
             Logger.getLogger(Salida.class.getName()).log(Level.SEVERE, null, ex);
@@ -43,7 +43,7 @@ public class Salida {
     public void noDejarPasarHincha(Hincha entrarHincha, String tribuna){
         try {
             this.semaforoNoDejarPasar.acquire();
-            hinchasQueNoEntraron.add("Se le nego la entrada el hincha " + entrarHincha.getNombre() + " a la hora " + entrarHincha.getHoraEntradaReal() + " por la puerta " + tribuna);
+            hinchasQueNoEntraron.add("Se le nego la entrada el hincha " + entrarHincha.getNombre() +" " + entrarHincha.getApellido() + " a la hora " + entrarHincha.getHoraEntradaReal() + " por la puerta " + tribuna);
             this.semaforoNoDejarPasar.release();
         } catch (InterruptedException ex) {
             Logger.getLogger(Salida.class.getName()).log(Level.SEVERE, null, ex);

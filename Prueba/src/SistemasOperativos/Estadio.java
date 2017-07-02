@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package prueba;
+package SistemasOperativos;
 
 import java.util.concurrent.Semaphore;
 
@@ -36,8 +36,8 @@ public class Estadio extends Thread {
    }
    
    public void imprimirReporte(){
-       ManejadorArchivosGenerico.escribirArchivo("src/prueba/HinchasEntraron.txt", salidaDelPrograma.retornarHinchasEntraror());
-       ManejadorArchivosGenerico.escribirArchivo("src/prueba/HinchasNoEntraron.txt", salidaDelPrograma.retornarHinchasNoEntraror());
+       ManejadorArchivosGenerico.escribirArchivo("src/SistemasOperativos/HinchasEntraron.txt", salidaDelPrograma.retornarHinchasEntraror());
+       ManejadorArchivosGenerico.escribirArchivo("src/SistemasOperativos/HinchasNoEntraron.txt", salidaDelPrograma.retornarHinchasNoEntraror());
    }
    
    public void hacerEntrarGente(){

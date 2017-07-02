@@ -2,5 +2,5 @@ Maria ,Rodriguez,4.234.111-5,1,10,True,False
 Andres,Costa,4.546.412-5,2,10,True,False
 Alejo,Correa,4.112.657-5,2,10,False,False
 Mariana,Viana,4.665.366-5,3,10,True,False
-Mauricio,Zaz,4.879.956-5,2,10,True,False
-Manuel,Miranda,4.879.956-5,2,10,True,False
+Mauricio,Zaz,4.879.956-5,3,10,True,False
+Manuel,Miranda,4.879.956-5,3,10,True,False

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package prueba;
+package SistemasOperativos;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -17,7 +17,6 @@ import java.util.logging.Logger;
  */
 public class CentroOperaciones extends Thread {
  public Semaphore semaforoOperaciones;
- Semaphore semaforoFin;
  Semaphore semaforoHabilitarInsercion;
  private boolean terminoAmsterdam;
  private boolean terminoColombes;
@@ -26,16 +25,14 @@ public class CentroOperaciones extends Thread {
  LinkedList<Hincha> hinchasAProcesar;
 
  
- public CentroOperaciones(Semaphore semaforoFin){
-     this.semaforoOperaciones = new Semaphore(0);
-     this.hinchasAProcesar = new LinkedList<Hincha>();
-    this.semaforoFin = semaforoFin;
+ public CentroOperaciones(){
+    this.semaforoOperaciones = new Semaphore(0);
+    this.hinchasAProcesar = new LinkedList<Hincha>();
     this.semaforoHabilitarInsercion = new Semaphore(1);
     this.terminoAmsterdam = false;
     this.terminoColombes = false;
     this.terminoAmerica = false;
     this.terminoOlimpica = false;
-    
             }
  
  public void agregarHinchaAProcesar(Hincha nuevoHincha){

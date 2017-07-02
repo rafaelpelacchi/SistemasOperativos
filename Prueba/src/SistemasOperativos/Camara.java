@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package prueba;
+package SistemasOperativos;
 
 /**
  *
  * @author Usuario
  */
-public class Procesador{
+public class Camara{
     //El hincha procesando es el hinca que el hilo esta agreagndo al buffer del centro de operaciones
     //Se usa en el método Run
     
     private CentroOperaciones centroDeOperaciones;
-    public Procesador(CentroOperaciones centroDeOperaciones){
+    public Camara(CentroOperaciones centroDeOperaciones){
         this.centroDeOperaciones = centroDeOperaciones;
     }
     

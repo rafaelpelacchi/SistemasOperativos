@@ -1,5 +1,5 @@
 
-package prueba;
+package SistemasOperativos;
 
 import java.util.concurrent.Semaphore;
 

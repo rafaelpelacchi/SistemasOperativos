@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package prueba;
+package SistemasOperativos;
 
 import java.util.concurrent.Semaphore;
 
@@ -37,13 +37,13 @@ public class Reloj extends Thread{
     public void run(){
          while(hayMasHinchas()){
              try{ 
-                tiempoActual.aumentarTiempo();
                 if(!controlAmsterdam.getTermino()){controlAmsterdam.getSemaphoreReloj().acquire();} 
                 if(!controlColombes.getTermino()){controlColombes.getSemaphoreReloj().acquire();}
                 if(!controlOlimpica.getTermino()){controlOlimpica.getSemaphoreReloj().acquire();}
                 if(!controlAmerica.getTermino()){controlAmerica.getSemaphoreReloj().acquire();} 
+                            
+                tiempoActual.aumentarTiempo();
                 
-            
                 if(!controlAmsterdam.getTermino()){controlAmsterdam.getSemaphore().release();} 
                 if(!controlColombes.getTermino()){controlColombes.getSemaphore().release();}
                 if(!controlOlimpica.getTermino()){controlOlimpica.getSemaphore().release();}

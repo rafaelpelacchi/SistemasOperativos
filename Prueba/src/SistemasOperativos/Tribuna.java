@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package prueba;
+package SistemasOperativos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class Tribuna  extends Thread{
   int indiceHinchaCamara;
   int contadorSocios;
   CentroOperaciones centroDeOperaciones;
-  Procesador[] misProcesadores;
+  Camara[] misCamaras;
   
   public Tribuna(String nombre, String documentoHinchas, 
           int cantidadFuncionarios, ControlTribuna controlDeTribuna, Tiempo tiempo,CentroOperaciones centroDeOperaciones){
@@ -38,9 +38,9 @@ public class Tribuna  extends Thread{
         this.prioridadSocio = new ArrayList<Hincha>();
         this.prioridadHincha = new ArrayList<Hincha>();
         cargarHinchas(documentoHinchas);
-        misProcesadores = new Procesador[2];
-        for(int i =0 ; i <misProcesadores.length ;i ++){
-            misProcesadores[i] = new Procesador(centroDeOperaciones);
+        misCamaras = new Camara[1];
+        for(int i =0 ; i <misCamaras.length ;i ++){
+            misCamaras[i] = new Camara(centroDeOperaciones);
         }
   }
   
@@ -101,10 +101,10 @@ public class Tribuna  extends Thread{
          try{
                 controlDeTribuna.getSemaphore().acquire();
                 Hincha hinchaAuxiliar;
-                for(int i = 0 ; i < this.misProcesadores.length ;i++  ){
+                for(int i = 0 ; i < this.misCamaras.length ;i++  ){
                     hinchaAuxiliar = elegirHinchaCamara();
                     if (hinchaAuxiliar.getNombre() != null){
-                         this.misProcesadores[i].procesarImagen(hinchaAuxiliar);                    
+                         this.misCamaras[i].procesarImagen(hinchaAuxiliar);                    
                     }
                 }
                 // 

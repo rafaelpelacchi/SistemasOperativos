@@ -1,4 +1,4 @@
-package sistemasOperativos;
+package SistemasOperativos;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,13 +15,13 @@ public class ManejadorArchivosGenerico {
 	 * @param nombreCompletoArchivo Nombre del archivo a revisr
 	 * @param listaLineasArchivo lista con las lineas del archivo
 	 */
-	public static void escribirArchivo(String nombreCompletoArchivo, String[] listaLineasArchivo) {
+	public static void escribirArchivo(String nombreCompletoArchivo, ArrayList<String> listaLineasArchivo) {
 		FileWriter fw;
 		try {
 			fw = new FileWriter(nombreCompletoArchivo,true);
 			BufferedWriter bw = new BufferedWriter(fw);
-			for (int i = 0; i < listaLineasArchivo.length; i++){
-				String lineaActual = listaLineasArchivo[i];
+			for (int i = 0; i < listaLineasArchivo.size(); i++){
+				String lineaActual = listaLineasArchivo.get(i);
 				bw.write(lineaActual);
 				bw.newLine();
 			}
