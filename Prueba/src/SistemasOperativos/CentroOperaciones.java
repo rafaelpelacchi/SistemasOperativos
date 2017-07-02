@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 public class CentroOperaciones extends Thread {
  public Semaphore semaforoOperaciones;
  Semaphore semaforoHabilitarInsercion;
+ Semaphore semaforoSincronizacion;
  private boolean terminoAmsterdam;
  private boolean terminoColombes;
  private boolean terminoOlimpica;
@@ -29,6 +30,7 @@ public class CentroOperaciones extends Thread {
     this.semaforoOperaciones = new Semaphore(0);
     this.hinchasAProcesar = new LinkedList<Hincha>();
     this.semaforoHabilitarInsercion = new Semaphore(1);
+    this.semaforoSincronizacion= new Semaphore(1);
     this.terminoAmsterdam = false;
     this.terminoColombes = false;
     this.terminoAmerica = false;
@@ -38,10 +40,12 @@ public class CentroOperaciones extends Thread {
  public void agregarHinchaAProcesar(Hincha nuevoHincha){
      if(nuevoHincha!=null){
          try {
+             this.semaforoSincronizacion.acquire();
              this.semaforoHabilitarInsercion.acquire();
              this.hinchasAProcesar.addLast(nuevoHincha);
              this.semaforoHabilitarInsercion.release();
              this.semaforoOperaciones.release();
+             this.semaforoSincronizacion.release();
          } catch (InterruptedException ex) {
              Logger.getLogger(CentroOperaciones.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -69,11 +73,11 @@ public class CentroOperaciones extends Thread {
          while(hayMasHinchas()){
             try{
             this.semaforoOperaciones.acquire();
-            try{
+             this.semaforoSincronizacion.acquire();
              Hincha hinchaAux = this.hinchasAProcesar.getFirst();
              hinchaAux.setLeido(true);
-             }catch(java.util.NoSuchElementException ex){System.out.println("a");}
              this.hinchasAProcesar.removeFirst();
+             this.semaforoSincronizacion.release();
             } catch(InterruptedException ex){
                 ex.printStackTrace();
                           System.out.println("Error");
