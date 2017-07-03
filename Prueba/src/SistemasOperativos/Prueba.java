@@ -48,10 +48,10 @@ public class Prueba {
          CentroOperaciones centroDeOperaciones = new CentroOperaciones();
          //Declaro mi reloj, dandole los semaforos de cada hinchada junto a sus 
          Reloj miReloj = new Reloj(datosAmsterdam,datosColombes,datosOlimpica,datosAmerica, tiempoActual,semaforoFin);
-         Tribuna amsterdam = new Tribuna("Amsterdam","src/SistemasOperativos/hinchasAmsterdamPocos.txt", 4,5,3, datosAmsterdam, tiempoActual,centroDeOperaciones);
-         Tribuna colombes = new Tribuna("Colombes","src/SistemasOperativos/hinchasColombesPocos.txt", 4,5,3, datosColombes, tiempoActual,centroDeOperaciones);
-         Tribuna olimpica = new Tribuna("Olimpica","src/SistemasOperativos/hinchasOlimpicaPocos.txt", 4,8,6, datosOlimpica, tiempoActual,centroDeOperaciones);
-         Tribuna america = new Tribuna("America","src/SistemasOperativos/hinchasAmericaPocos.txt", 4,8,6, datosAmerica, tiempoActual,centroDeOperaciones);
+         Tribuna amsterdam = new Tribuna("Amsterdam","src/SistemasOperativos/hinchasAmsterdamM.txt", 4,5,3, datosAmsterdam, tiempoActual,centroDeOperaciones);
+         Tribuna colombes = new Tribuna("Colombes","src/SistemasOperativos/hinchasColombesM.txt", 4,5,3, datosColombes, tiempoActual,centroDeOperaciones);
+         Tribuna olimpica = new Tribuna("Olimpica","src/SistemasOperativos/hinchasOlimpicaM.txt", 4,8,6, datosOlimpica, tiempoActual,centroDeOperaciones);
+         Tribuna america = new Tribuna("America","src/SistemasOperativos/hinchasAmericaM.txt", 4,8,6, datosAmerica, tiempoActual,centroDeOperaciones);
          
          Estadio estadioCentenario = new Estadio("Estadio Centenario",amsterdam,colombes,olimpica,america,miReloj,semaforoFin, salidaDatos,centroDeOperaciones);
          
